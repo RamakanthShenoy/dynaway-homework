@@ -23,10 +23,19 @@
   </ion-header>
 
   <ion-grid class="list">
-    <ion-row>
-      <ion-col *ngFor="let asset of assets" size-xl="4" size-md="6" size="12">
-        <app-asset-card [asset]="asset"></app-asset-card>
-      </ion-col>
-    </ion-row>
+    <ng-container *ngIf="assets.length; else skeleton"> 
+      <ion-row> 
+        <ion-col *ngFor="let asset of assets" size-xl="4" size-md="6" size="12"> 
+          <app-asset-card [asset]="asset"></app-asset-card> 
+        </ion-col> 
+      </ion-row> 
+    </ng-container>
+    <ng-template #skeleton> 
+      <ion-row> 
+        <ion-col *ngFor="let _ of [].constructor(6)" size-xl="4" size-md="6" size="12">
+          <app-asset-card /> 
+        </ion-col> 
+      </ion-row> 
+    </ng-template>
   </ion-grid>
 </ion-content>
