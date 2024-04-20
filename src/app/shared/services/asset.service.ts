@@ -19,7 +19,7 @@ export class AssetService {
     return of((mockAssetHttpResponse?.data && mockAssetHttpResponse.ok) ? mockAssetHttpResponse.data: []).pipe(
       delay(getRandomInt(1000) + 500), // fake random http delay,
       tap(() => { // a small chance for the data fetch to error
-        if (getRandomInt(10) % 10 === 0) throw Error('Http error')
+        if (getRandomInt(10) % 10 === 0) throw Error('An Http error has occurred in the asset service while fetching the assets via get all method')
       }),
     )
   }

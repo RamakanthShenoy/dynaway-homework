@@ -6,6 +6,15 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-alert 
+  [isOpen]="isAlertOpen" 
+  header="Error!!" 
+  subHeader="An Error has occured!!" 
+  message="{{errorMessage}}"
+  [buttons]="alertButtons" 
+  (didDismiss)="setOpen(false)">
+  </ion-alert>
+
 <ion-content [fullscreen]="true" color="background">
   <ion-header collapse="condense">
     <ion-toolbar color="primary">

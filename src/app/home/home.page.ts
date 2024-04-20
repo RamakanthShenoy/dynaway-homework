@@ -9,11 +9,27 @@ import { AssetService } from '../shared/services/asset.service'
 })
 export class HomePage {
   assets: Asset[] = []
+  errorMessage: string = ""
+  isAlertOpen = false;
+  alertButtons = ['Ok'];
+
+  setOpen(isOpen: boolean) {
+    this.isAlertOpen = isOpen;
+  }
 
   constructor(private assetService: AssetService) {}
 
   ionViewWillEnter(): void {
     this.assets = []
-    this.assetService.getAll().subscribe(assets => this.assets = assets)
+    this.errorMessage = "";
+    this.assetService.getAll().subscribe(
+      {
+        next: (assets) => {this.assets = assets;},
+        error: (error) => {
+          this.errorMessage = error.message;
+          this.setOpen(true);
+      }
+    }
+    )
   }
 }
